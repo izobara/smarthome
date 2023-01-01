@@ -5,7 +5,7 @@ services:
     container_name: haproxy
     image: haproxy:2.7-alpine
     volumes:
-      - $(pwd)/haproxy:/usr/local/etc/haproxy:ro
+      - ./haproxy:/usr/local/etc/haproxy:ro
     restart: unless-stopped
     ports:
       - "8404:8404"
