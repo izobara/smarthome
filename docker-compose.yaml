@@ -1,6 +1,17 @@
 version: '3.0'
 
 services:
+  haproxy:
+    container_name: haproxy
+    image: haproxy:2.7-alpine
+    volumes:
+      - $(pwd)/haproxy:/usr/local/etc/haproxy:ro
+    restart: unless-stopped
+    ports:
+      - "8404:8404"
+      - "80:80"
+      - "443:443"
+
   homeassistant:
     container_name: homeassistant
     image: "ghcr.io/home-assistant/home-assistant:stable"
@@ -9,5 +20,3 @@ services:
       - /etc/localtime:/etc/localtime:ro
     restart: unless-stopped
     privileged: true
-    ports:
-      - "8123:8123/tcp"
